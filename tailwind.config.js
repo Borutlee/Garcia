@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: 'class', // 👈 السطر ده هو المحرك الأساسي لسيستم الدارك مود بالـ كلاس
+  darkMode: ['class', '.light'], // 👈 بتقول لتايلوند إن قلب المود بيحصل بكلاس light مش dark
   content: [
     './index.html',
     './src/**/*.{js,ts,jsx,tsx}',

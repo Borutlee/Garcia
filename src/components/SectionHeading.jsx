@@ -8,12 +8,20 @@ export default function SectionHeading({ eyebrow, title, className = '' }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.4 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className={`text-center mb-10 ${className}`}
+      className={`text-center mb-12 ${className}`}
     >
-      {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-      {/* التعديل هنا: جعل النص غامقاً في الفاتح وفاتحاً في الداكن */}
-      <h2 className="text-3xl md:text-4xl font-bold text-garcia-950 dark:text-cream mt-2">{title}</h2>
-      <div className="divider" />
+      {eyebrow && (
+        <p className="text-gold font-body text-sm font-semibold uppercase tracking-widest mb-2">
+          {eyebrow}
+        </p>
+      )}
+
+      <h2 className="text-3xl md:text-4xl font-bold font-display text-cream dark:text-garcia-950 mt-2 transition-colors duration-300">
+        {title}
+      </h2>
+
+      {/* الـ divider معمول بـ Tailwind مباشرة عشان تضمن ثبات لونه */}
+      <div className="w-16 h-[2px] bg-gold mx-auto mt-4" />
     </motion.div>
   )
 }
