@@ -1,5 +1,5 @@
 import React from 'react'
-import { ThemeProvider } from './context/ThemeContext'
+import { ThemeProvider } from './Context/ThemeContext'
 import Navbar from './sections/Navbar'
 import Hero from './sections/Hero'
 import Menu from './sections/Menu'
