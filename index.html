@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="./src/imgs/logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Garcia Restaurant & Cafe | مطعم وكافيه جارسيا</title>
+  <meta name="description" content="Garcia Restaurant & Cafe — Good Food, Good Mood" />
+
+  <!-- Google Fonts: Playfair Display (display) + Poppins (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+    <script>
+      (function () {
+        var theme = localStorage.getItem('garcia-theme')
+        if (theme === 'light') {
+          document.documentElement.classList.add('light')
+        }
+      })()
+    </script>
+</head>
+
+<body class="bg-garcia-900">
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
+</html>
