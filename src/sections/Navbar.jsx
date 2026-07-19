@@ -5,7 +5,7 @@ import Button from '../components/Button'
 import ThemeToggle from '../components/ThemeToggle'
 import logo from '../imgs/logo.png'
 import logo3 from '../imgs/logo3.png'
-import { useTheme } from '../context/ThemeContext'
+import { useTheme } from '../Context/ThemeContext'
 
 const NAV_LINKS = [
   { label: 'Home', href: '#home' },
