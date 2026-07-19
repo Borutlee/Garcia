@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------
+   Theme variables: Dark (default) + Light override
+   Toggling adds/removes the "light" class on <html>
+--------------------------------------------- */
+:root {
+  /* Dark theme (site default) */
+  --c-garcia-950: 8 20 16;
+  --c-garcia-900: 11 28 21;
+  --c-garcia-800: 18 42 32;
+  --c-garcia-700: 27 58 44;
+  --c-garcia-600: 37 74 57;
+
+  --c-gold: 212 175 55;
+  --c-gold-light: 230 200 102;
+  --c-gold-dark: 169 134 42;
+
+  --c-cream: 244 239 230;
+  --c-cream-muted: 207 199 184;
+}
+
+.light {
+  /* Light theme overrides */
+  --c-garcia-950: 237 232 219;
+  --c-garcia-900: 250 247 240;
+  --c-garcia-800: 255 255 255;
+  --c-garcia-700: 223 216 199;
+  --c-garcia-600: 209 199 175;
+
+  --c-gold: 178 136 26;
+  --c-gold-light: 224 181 74;
+  --c-gold-dark: 138 102 20;
+
+  --c-cream: 11 28 21;
+  --c-cream-muted: 74 80 73;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-garcia-gradient text-cream font-body antialiased transition-colors duration-300;
+}
+
+h1, h2, h3, h4 {
+  @apply font-display;
+}
+
+.eyebrow {
+  @apply text-gold text-sm tracking-[0.25em] uppercase font-medium;
+}
+
+.divider {
+  @apply w-16 h-[2px] bg-gold/60 mx-auto my-4;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(var(--c-garcia-950));
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--c-gold));
+  border-radius: 8px;
+}
