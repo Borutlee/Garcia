@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MapPin, Clock, Star, Rocket, UtensilsCrossed, CalendarCheck } from 'lucide-react'
 import Button from '../components/Button'
@@ -16,57 +16,47 @@ const INFO_ITEMS = [
 export default function Hero() {
   const { theme } = useTheme()
 
-  // تحميل مسبق للصور في الـ Cache لمنع أي وميض أو تأخير عند التبديل
-  useEffect(() => {
-    const imagesToPreload = [darkHero, lightHero]
-    imagesToPreload.forEach((src) => {
-      const img = new Image()
-      img.src = src
-    })
-  }, [])
-
   return (
     <section
       id="home"
       className="relative pt-36 md:pt-48 pb-20 px-5 md:px-10 overflow-hidden bg-garcia-900"
     >
-      {/* 1. سكشن الخلفية السينمائية - متجاوب ومنفصل التحكم تماماً */}
-      <div className="absolute inset-0 md:left-auto md:right-0 w-full md:w-[60%] h-full pointer-events-none z-0">
+      {/* 1. خلفية الهيدر - دخول ناعم مع Lazy Loading */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, ease: 'easeOut' }} // ظهور تدريجي ناعم جداً أول ما الصفحة تفتح
+        className="absolute inset-0 md:left-auto md:right-0 w-full md:w-[60%] h-full pointer-events-none z-0"
+      >
         <AnimatePresence mode="wait">
           <motion.img
             key={theme}
             src={theme === 'dark' ? darkHero : lightHero}
             alt="Garcia Ambiance"
-            loading="eager"
+            loading="lazy" // حظر التحميل المباشر وتفعيل الـ Lazy
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }} // الأنيميشن شغال على الظهور والـ Cross-fade بس
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-            // 👈 التحكم كله هنا: opacity-35 على الموبايل عشان يدي الشفافية الخفيفة، و md:opacity-90 عشان يرجع واضح ونار على الديسكتوب
-            className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-300 ${
+            transition={{ duration: 0.6, ease: 'easeInOut' }} // تنقل ناعم بين الثيمات
+            className={`absolute inset-0 w-full h-full object-cover object-center ${
               theme === 'dark' ? 'opacity-30 md:opacity-85' : 'opacity-40 md:opacity-95'
             }`}
           />
         </AnimatePresence>
 
-        {/* طبقات التدريج والتعتيم (الجرادينت) */}
-        {/* على الموبايل: تظليل كامل خفيف .. على الديسكتوب: الجرادينت الجانبي الفخم اللي بيدمج الصورة مع الخلفية الداكنة */}
         <div className="absolute inset-0 bg-garcia-900/60 md:bg-gradient-to-r md:from-garcia-900 md:via-garcia-900/20 md:to-transparent" />
-        
-        {/* تدريج رأسي ناعم لدمج الحافة السفلية للسكشن */}
         <div className="absolute inset-0 bg-gradient-to-t from-garcia-900 via-transparent to-transparent" />
-      </div>
+      </motion.div>
 
-      {/* تأثير إضاءة دافئة دائرية في الخلفية */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-gold/5 rounded-full blur-[140px] pointer-events-none z-0"></div>
+      {/* إضاءة دافئة */}
+      <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-gold/5 rounded-full blur-[80px] pointer-events-none z-0"></div>
 
-      {/* 2. المحتوى الرئيسي */}
+      {/* 2. المحتوى الرئيسي - رجعنا الحركة من الشمال لليمين */}
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
-        {/* Left: text content */}
         <motion.div
-          initial={{ opacity: 0, x: -40 }}
+          initial={{ opacity: 0, x: -35 }} // دخول الكلام من الشمال لليمين
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
+          transition={{ duration: 0.5, ease: 'easeOut' }} // سرعة متوازنة
           className="text-center md:text-left md:pr-6"
         >
           <p className="font-display italic text-gold text-lg md:text-xl mb-2">
@@ -112,17 +102,15 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* المساحة الفارغة المخصصة لظهور الصورة بوضوح على الديسكتوب */}
         <div className="hidden md:block" />
       </div>
 
-      {/* 3. الـ Info strip في أسفل السكشن */}
+      {/* 3. الـ Info strip */}
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6 }}
-        className="max-w-6xl mx-auto mt-20 border border-gold/20 rounded-xl bg-garcia-800/40 backdrop-blur-md grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-4 md:p-2 relative z-10"
+        initial={{ opacity: 0, x: -20 }} // أنيميشن من الشمال لليمين أيضاً
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+        className="max-w-6xl mx-auto mt-20 border border-gold/20 rounded-xl bg-garcia-800/90 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-4 md:p-2 relative z-10"
       >
         {INFO_ITEMS.map(({ icon: Icon, title, subtitle }, index) => (
           <div

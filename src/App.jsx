@@ -23,7 +23,7 @@ export default function App() {
           <Hero />
           <Menu />
           <Offers />
-          <OrderOnline />
+          {/* <OrderOnline /> */}
           <Reservation />
           <Gallery />
         </main>

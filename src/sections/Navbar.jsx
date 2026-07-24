@@ -21,13 +21,23 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const { theme } = useTheme()
 
+  // تحسين أداء حدث الـ scroll لعدم تقطيع الفريمات
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', onScroll)
+    let ticking = false
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 20)
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // يمنع سكرول الصفحة اللي ورا لما الـ drawer يكون مفتوح
+  // منع سكرول الخلفية عند فتح المنيو
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : ''
     return () => {
@@ -43,8 +53,11 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-garcia-900/95 backdrop-blur-md shadow-lg border-b border-cream/5' : 'bg-garcia-900/70 backdrop-blur-sm'
-        }`}
+      className={`fixed top-0 left-0 w-full z-50 transition-colors duration-200 will-change-transform ${
+        scrolled
+          ? 'bg-garcia-900 shadow-md border-b border-cream/10'
+          : 'bg-garcia-900/90'
+      }`}
     >
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-5 md:px-10 py-3">
         {/* Logo Section */}
@@ -52,10 +65,11 @@ export default function Navbar() {
           <img
             src={theme === 'dark' ? logo : logo3}
             alt="Garcia Logo"
-            className="w-16 h-16 rounded-full object-cover contrast-125 transition-transform duration-300 group-hover:scale-105"
+            className="w-14 h-14 rounded-full object-cover contrast-125 transition-transform duration-200 group-hover:scale-105"
+            loading="eager"
           />
           <div className="leading-tight text">
-            <p className="text-cream font-serif font-semibold tracking-wider text-base md:text-lg ">
+            <p className="text-cream font-serif font-semibold tracking-wider text-base md:text-lg">
               GARCIA
             </p>
             <p className="text-[9px] text-cream/60 tracking-[0.25em] uppercase hidden sm:block font-sans">
@@ -71,7 +85,7 @@ export default function Navbar() {
               <a
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="text-xs md:text-sm text-cream/70 hover:text-gold transition-colors duration-300 uppercase tracking-widest font-sans font-medium"
+                className="text-xs md:text-sm text-cream/70 hover:text-gold transition-colors duration-200 uppercase tracking-widest font-sans font-medium"
               >
                 {link.label}
               </a>
@@ -104,27 +118,27 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <>
-            {/* Overlay خلفية شفافة تقفل الـ drawer لما تدوس عليها */}
+            {/* Overlay بدون backdrop-blur لسرعة وسلاسة الاستجابة */}
             <motion.div
               key="overlay"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
+              transition={{ duration: 0.2 }}
               onClick={() => setMobileOpen(false)}
-              className="fixed inset-0 bg-black/80 backdrop-blur-md z-[90] lg:hidden"
+              className="fixed inset-0 bg-black/75 z-[90] lg:hidden"
             />
 
-            {/* Drawer نفسه — بيملا الشاشة بالطول ومستحيل يهرب منه عنصر */}
+            {/* Drawer */}
             <motion.div
               key="drawer"
               initial={{ x: '-100%' }}
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
-              transition={{ type: 'tween', duration: 0.3, ease: 'easeOut' }}
-              className="fixed top-0 left-0 h-screen w-[85%] max-w-xs bg-garcia-900 dark:bg-garcia-950 border-r border-cream/10 z-[100] lg:hidden flex flex-col shadow-2xl"
+              transition={{ type: 'tween', duration: 0.25, ease: 'easeOut' }}
+              className="fixed top-0 left-0 h-screen w-[85%] max-w-xs bg-garcia-900 border-r border-cream/10 z-[100] lg:hidden flex flex-col shadow-2xl"
             >
-              {/* رأس الـ drawer: لوجو + زرار إغلاق */}
+              {/* Header */}
               <div className="flex items-center justify-between px-6 py-5 border-b border-cream/10 shrink-0">
                 <div className="flex items-center gap-2">
                   <img
@@ -145,28 +159,23 @@ export default function Navbar() {
                 </button>
               </div>
 
-              {/* روابط الصفحة */}
+              {/* Links */}
               <ul className="flex flex-col gap-1 px-6 py-4 flex-1 overflow-y-auto">
-                {NAV_LINKS.map((link, i) => (
-                  <motion.li
-                    key={link.href}
-                    initial={{ opacity: 0, x: -15 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.25, delay: i * 0.04 }}
-                  >
+                {NAV_LINKS.map((link) => (
+                  <li key={link.href}>
                     <a
                       href={link.href}
                       onClick={(e) => handleNavClick(e, link.href)}
-                      className="text-cream/80 hover:text-gold uppercase text-sm tracking-widest font-sans block py-3.5 border-b border-cream/5"
+                      className="text-cream/80 hover:text-gold uppercase text-sm tracking-widest font-sans block py-3.5 border-b border-cream/5 transition-colors duration-150"
                     >
                       {link.label}
                     </a>
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
 
-              {/* زرار الطلب أسفل الـ drawer ومثبت مكانه تماماً */}
-              <div className="px-6 py-6 border-t border-cream/10 bg-garcia-900 dark:bg-garcia-950 shrink-0">
+              {/* Bottom CTA */}
+              <div className="px-6 py-6 border-t border-cream/10 bg-garcia-900 shrink-0">
                 <Button variant="outline" icon={ShoppingBag} className="w-full justify-center uppercase tracking-wider py-3 text-sm">
                   Order Now
                 </Button>
