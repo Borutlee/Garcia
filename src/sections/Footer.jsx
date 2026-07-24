@@ -12,7 +12,7 @@ const QUICK_LINKS = [
 
 const SOCIALS = [
   { icon: Facebook, href: 'https://www.facebook.com/Garcia.Restaurant.Cafe' },
-  { icon: Instagram, href: 'https://www.instagram.com/garcia.eg/' },
+  { icon: Instagram, href: 'https://www.instagram.com/garciarestaurant/?hl=en' },
   { icon: MessageCircle, href: 'https://api.whatsapp.com/message/N4NWMWKG6IPOH1?autoload=1&app_absent=0' },
 ]
 
