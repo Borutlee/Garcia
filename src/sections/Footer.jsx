@@ -1,5 +1,8 @@
 import React from 'react'
 import { Facebook, Instagram, MessageCircle, MapPin, Phone, Mail } from 'lucide-react'
+import darklogo from '../imgs/logo.png'
+import lightlogo from '../imgs/logo3.png'
+import { useTheme } from '../Context/ThemeContext'
 
 const QUICK_LINKS = [
   { label: 'Home', href: '#home' },
@@ -17,15 +20,21 @@ const SOCIALS = [
 ]
 
 export default function Footer() {
+  // ✅ التصحيح: استدعاء الـ Hook جوة الكومبوننت هنا
+  const { theme } = useTheme()
+
   return (
     <footer id="footer" className="bg-garcia-900 border-t border-cream/10 pt-16 pb-8 px-5 md:px-10">
       <div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
         {/* Brand */}
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <div className="w-9 h-9 rounded-full border border-gold flex items-center justify-center text-gold font-serif font-bold">
-              G
-            </div>
+            <img
+              src={theme === 'dark' ? darklogo : lightlogo}
+              alt="Garcia Logo"
+              className="w-14 h-14 rounded-full object-cover contrast-125 transition-transform duration-200 group-hover:scale-105"
+              loading="eager"
+            />
             <div>
               <p className="text-cream font-serif font-semibold tracking-wide">GARCIA</p>
               <p className="text-[10px] text-cream/60 tracking-[0.2em] uppercase font-sans">

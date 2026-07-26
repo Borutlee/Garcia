@@ -8,6 +8,7 @@ import OrderOnline from './sections/OrderOnline'
 import Reservation from './sections/Reservation'
 import Gallery from './sections/Gallery'
 import Footer from './sections/Footer'
+import LocationSection from './sections/LocationSection'
 
 /**
  * App.jsx
@@ -26,6 +27,7 @@ export default function App() {
           {/* <OrderOnline /> */}
           <Reservation />
           <Gallery />
+          <LocationSection />
         </main>
         <Footer />
       </div>
