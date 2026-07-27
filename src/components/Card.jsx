@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTheme } from '../Context/ThemeContext'
 
 export default function CategoryCard({
   image,
@@ -9,12 +10,14 @@ export default function CategoryCard({
   onClick,
   className = '',
 }) {
+  const { theme } = useTheme()
+
   return (
     <div
       onClick={onClick}
       className={`group relative rounded-xl overflow-hidden cursor-pointer w-full transition-all duration-300 select-none
         border flex flex-col justify-end min-h-[140px] md:min-h-[160px] p-4
-        bg-garcia-800 dark:bg-garcia-800
+        bg-garcia-800
         ${
           active
             ? 'border-gold shadow-[0_0_20px_rgba(212,175,55,0.25)] ring-1 ring-gold/40 scale-[1.02]'
@@ -22,7 +25,7 @@ export default function CategoryCard({
         }
         ${className}`}
     >
-      {/* 1. صورة الخلفية: الشفافية بقت عالية وواضحة جداً في الهوفر وفي العادي */}
+      {/* 1. صورة الخلفية */}
       {image ? (
         <img
           src={image}
@@ -30,16 +33,16 @@ export default function CategoryCard({
           loading="lazy"
           className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-110 ${
             active 
-              ? 'opacity-70 dark:opacity-60' 
-              : 'opacity-50 group-hover:opacity-75 dark:opacity-40 dark:group-hover:opacity-60'
+              ? 'opacity-85' 
+              : 'opacity-70 group-hover:opacity-90'
           }`}
         />
       ) : (
         <div className="absolute inset-0 bg-garcia-900" />
       )}
 
-      {/* 2. التدريج الداكن الموحد: بيدي تباطؤ وتعتيم خفيف تحت النص بس عشان يقرأ، وبدون أي بلور أبيض مغبش */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent group-hover:from-black/70 transition-opacity duration-300 z-10" />
+      {/* 2. التدريج الداكن */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent group-hover:from-black/50 transition-opacity duration-300 z-10" />
 
       {/* 3. الـ Badge العلوي */}
       {badge && (
@@ -48,12 +51,16 @@ export default function CategoryCard({
         </span>
       )}
 
-      {/* 4. النصوص - واضحة دائماً باللون الفاتح فوق التدريج الأسود الناعم */}
+      {/* 4. النصوص - لون الأكتيف والهوفر متناسقين تماماً مع المود */}
       <div className="relative z-20 text-left">
         {title && (
           <h3
             className={`font-serif font-bold text-sm md:text-base leading-tight transition-colors duration-200 line-clamp-2 ${
-              active ? 'text-gold' : 'text-cream group-hover:text-gold'
+              active 
+                ? theme === 'light' ? 'text-amber-300' : 'text-gold'
+                : theme === 'light'
+                  ? 'text-white group-hover:text-amber-300'
+                  : 'text-white group-hover:text-gold'
             }`}
           >
             {title}
@@ -61,7 +68,7 @@ export default function CategoryCard({
         )}
 
         {subtitle && (
-          <p className="text-cream/70 text-[11px] font-sans mt-1 tracking-widest uppercase font-medium">
+          <p className="text-white/80 text-[11px] font-sans mt-1 tracking-widest uppercase font-medium">
             {subtitle}
           </p>
         )}

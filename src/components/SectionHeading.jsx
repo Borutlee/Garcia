@@ -16,7 +16,7 @@ export default function SectionHeading({ eyebrow, title, className = '' }) {
         </p>
       )}
 
-      <h2 className="text-3xl md:text-4xl font-bold font-display text-cream dark:text-garcia-950 mt-2 transition-colors duration-300">
+      <h2 className="text-3xl md:text-4xl font-bold font-display text-cream light:text-garcia-950 mt-2 transition-colors duration-300">
         {title}
       </h2>
 

@@ -54,7 +54,7 @@ export const dishesByCategory = {
       id: 2,
       name: 'Penne Arrabbiata',
       price: 180,
-      image: 'https://images.unsplash.com/photo-1621996346565-e3d5d6281288?auto=format&fit=crop&w=400&q=80',
+      image: 'https://images.unsplash.com/photo-1546549032-9571cd6b27df?auto=format&fit=crop&w=400&q=80',
     },
     {
       id: 3,
@@ -165,31 +165,31 @@ export const dishesByCategory = {
   ],
 }
 
-// Data for the "Special Offers" section
+// Data for the "Special Offers" section (Realistic & Engaging Offers)
 export const offers = [
   {
     id: 1,
-    title: 'Lunch Special',
-    description: 'On all pasta dishes',
-    time: '12:00 PM - 4:00 PM',
-    badge: '15% OFF',
-    image: 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=600&q=80',
+    title: 'Morning Boost Combo',
+    description: 'Any specialty coffee + fresh bakery or croissant of your choice',
+    time: 'Daily from 8:00 AM - 12:00 PM',
+    badge: 'SAVE 20%',
+    image: 'https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=600&q=80',
   },
   {
     id: 2,
-    title: 'Burger Night',
-    description: 'Every Monday',
-    time: 'From 5:00 PM',
-    badge: '20% OFF',
-    image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80',
+    title: 'Garcia Executive Combo',
+    description: 'Main dish (Burger or Pasta) + Side item + Soft Drink',
+    time: 'Sun - Thu from 1:00 PM - 6:00 PM',
+    badge: 'BEST SELLER',
+    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80',
   },
   {
     id: 3,
-    title: 'Dessert Treat',
-    description: 'Free dessert with any',
-    time: 'order over 200 EGP',
-    badge: 'FREE',
-    image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80',
+    title: 'Gathering Dessert Treat',
+    description: 'Order 2 main courses & get any signature dessert on the house',
+    time: 'Thu - Sat from 7:00 PM',
+    badge: 'FREE DESSERT',
+    image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80',
   },
 ]
 

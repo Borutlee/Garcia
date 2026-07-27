@@ -61,18 +61,19 @@ export default function Navbar() {
     >
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-5 md:px-10 py-3">
         {/* Logo Section */}
-        <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="flex items-center gap-3 group">
+        <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="flex items-center gap-2.5 sm:gap-3 group">
           <img
             src={theme === 'dark' ? logo : logo3}
             alt="Garcia Logo"
-            className="w-14 h-14 rounded-full object-cover contrast-125 transition-transform duration-200 group-hover:scale-105"
+            className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover contrast-125 transition-transform duration-200 group-hover:scale-105"
             loading="eager"
           />
-          <div className="leading-tight text">
+          <div className="leading-tight">
             <p className="text-cream font-serif font-semibold tracking-wider text-base md:text-lg">
               GARCIA
             </p>
-            <p className="text-[9px] text-cream/60 tracking-[0.25em] uppercase hidden sm:block font-sans">
+            {/* 👈 تم إظهار الكلمة دائماً وتعديل الحجم للحفاظ على تناسق الهيدر في الموبايل */}
+            <p className="text-[8px] sm:text-[9px] text-cream/60 tracking-[0.2em] sm:tracking-[0.25em] uppercase font-sans">
               Restaurant & Cafe
             </p>
           </div>
@@ -140,15 +141,20 @@ export default function Navbar() {
             >
               {/* Header */}
               <div className="flex items-center justify-between px-6 py-5 border-b border-cream/10 shrink-0">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2.5">
                   <img
                     src={theme === 'dark' ? logo : logo3}
                     alt="Garcia Logo"
                     className="w-10 h-10 rounded-full object-cover contrast-125"
                   />
-                  <p className="text-cream font-serif font-semibold tracking-wider text-sm">
-                    GARCIA
-                  </p>
+                  <div className="leading-tight">
+                    <p className="text-cream font-serif font-semibold tracking-wider text-sm">
+                      GARCIA
+                    </p>
+                    <p className="text-[8px] text-cream/60 tracking-[0.2em] uppercase font-sans">
+                      Restaurant & Cafe
+                    </p>
+                  </div>
                 </div>
                 <button
                   onClick={() => setMobileOpen(false)}

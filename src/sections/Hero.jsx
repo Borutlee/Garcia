@@ -21,11 +21,11 @@ export default function Hero() {
       id="home"
       className="relative pt-36 md:pt-48 pb-20 px-5 md:px-10 overflow-hidden bg-garcia-900"
     >
-      {/* 1. خلفية الهيدر - دخول ناعم مع Lazy Loading */}
+      {/* 1. خلفية الهيدر */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, ease: 'easeOut' }} // ظهور تدريجي ناعم جداً أول ما الصفحة تفتح
+        transition={{ duration: 1, ease: 'easeOut' }}
         className="absolute inset-0 md:left-auto md:right-0 w-full md:w-[60%] h-full pointer-events-none z-0"
       >
         <AnimatePresence mode="wait">
@@ -33,51 +33,61 @@ export default function Hero() {
             key={theme}
             src={theme === 'dark' ? darkHero : lightHero}
             alt="Garcia Ambiance"
-            loading="lazy" // حظر التحميل المباشر وتفعيل الـ Lazy
+            loading="lazy"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, ease: 'easeInOut' }} // تنقل ناعم بين الثيمات
+            transition={{ duration: 0.6, ease: 'easeInOut' }}
+
             className={`absolute inset-0 w-full h-full object-cover object-center ${
-              theme === 'dark' ? 'opacity-30 md:opacity-85' : 'opacity-40 md:opacity-95'
+              theme === 'dark' 
+                ? 'opacity-60 md:opacity-95' 
+                : 'opacity-70 md:opacity-100'
             }`}
           />
         </AnimatePresence>
 
-        <div className="absolute inset-0 bg-garcia-900/60 md:bg-gradient-to-r md:from-garcia-900 md:via-garcia-900/20 md:to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-garcia-900 via-transparent to-transparent" />
+        {/* 🎯 الجرادينت الرئيسي: 
+            - تم تخفيف التعتيم لتوضيح التفاصيل خلف النصوص بشكل متوازن.
+        */}
+        <div className="absolute inset-0 bg-garcia-900/50 md:bg-gradient-to-r md:from-garcia-900 md:via-garcia-900/20 md:to-transparent" />
+        
+        {/* جرادينت رأسي لدمج أطراف الصورة مع باقي السكشنات */}
+        <div className="absolute inset-0 bg-gradient-to-t from-garcia-900 via-transparent to-garcia-900/20 md:to-transparent" />
       </motion.div>
 
       {/* إضاءة دافئة */}
       <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-gold/5 rounded-full blur-[80px] pointer-events-none z-0"></div>
 
-      {/* 2. المحتوى الرئيسي - رجعنا الحركة من الشمال لليمين */}
+      {/* 2. المحتوى الرئيسي */}
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
         <motion.div
-          initial={{ opacity: 0, x: -35 }} // دخول الكلام من الشمال لليمين
+          initial={{ opacity: 0, x: -35 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }} // سرعة متوازنة
+          transition={{ duration: 0.5, ease: 'easeOut' }}
           className="text-center md:text-left md:pr-6"
         >
           <p className="font-display italic text-gold text-lg md:text-xl mb-2">
             Welcome to iconic
           </p>
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-serif font-extrabold text-cream leading-[1.05] tracking-wide font-display">
+          
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-serif font-extrabold text-cream leading-[1.05] tracking-wide font-display drop-shadow-md md:drop-shadow-none">
             GARCIA
           </h1>
-          <p className="text-lg sm:text-xl md:text-2xl tracking-[0.3em] text-cream/60 mt-2 font-display">
+
+          <p className="text-lg sm:text-xl md:text-2xl tracking-[0.3em] text-cream/70 md:text-cream/50 mt-2 font-display">
             RESTAURANT & CAFE
           </p>
 
           <div className="flex items-center justify-center md:justify-start gap-3 mt-5">
-            <span className="w-8 h-[1px] bg-gold/60" />
+            <span className="w-8 h-[1px] bg-gold/60 md:bg-gold/40" />
             <p className="text-gold text-xs tracking-[0.3em] uppercase font-sans font-medium">
               Good Food • Good Mood
             </p>
-            <span className="w-8 h-[1px] bg-gold/60" />
+            <span className="w-8 h-[1px] bg-gold/60 md:bg-gold/40" />
           </div>
 
-          <p className="text-cream/80 mt-6 max-w-md mx-auto md:mx-0 leading-relaxed font-sans text-base">
+          <p className="text-cream/90 md:text-cream/70 mt-6 max-w-md mx-auto md:mx-0 leading-relaxed font-sans text-base">
             A place where great food, warm atmosphere and good times come together.
             Experience the authentic taste in the heart of Heliopolis.
           </p>
@@ -107,10 +117,10 @@ export default function Hero() {
 
       {/* 3. الـ Info strip */}
       <motion.div
-        initial={{ opacity: 0, x: -20 }} // أنيميشن من الشمال لليمين أيضاً
+        initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="max-w-6xl mx-auto mt-20 border border-gold/20 rounded-xl bg-garcia-800/90 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-4 md:p-2 relative z-10"
+        className="max-w-6xl mx-auto mt-20 border border-gold/15 rounded-xl bg-garcia-800/90 md:bg-garcia-800/80 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-4 md:p-2 relative z-10 backdrop-blur-sm"
       >
         {INFO_ITEMS.map(({ icon: Icon, title, subtitle }, index) => (
           <div
@@ -124,7 +134,7 @@ export default function Hero() {
             </div>
             <div>
               <p className="text-cream text-sm font-semibold font-sans">{title}</p>
-              <p className="text-cream/60 text-xs font-sans mt-0.5">{subtitle}</p>
+              <p className="text-cream/60 md:text-cream/50 text-xs font-sans mt-0.5">{subtitle}</p>
             </div>
           </div>
         ))}
